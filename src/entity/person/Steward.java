@@ -1,7 +1,7 @@
 package entity.person;
 
 /**
- * dDit representeert een steward.
+ * Dit representeert een steward.
  */
 public class Steward extends Staff {
     public Steward(String firstName, String lastName, String nationalRegisterNumber, String birthDate){
