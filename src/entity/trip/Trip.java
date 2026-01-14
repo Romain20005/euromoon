@@ -16,7 +16,6 @@ public class Trip {
     private String toStation;
     private LocalDateTime departureTime;
     private Train train;
-
     private Driver driver;
     private List<Steward> stewards = new ArrayList<>();
 

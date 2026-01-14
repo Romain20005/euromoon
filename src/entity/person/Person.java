@@ -1,7 +1,8 @@
 package entity.person;
 
 /**
- * Dit is is een abstarcte klasse om een persoon te representeren in mijn systeem */
+ * Dit is is een abstarcte klasse om een persoon te representeren in mijn systeem
+ */
 public abstract class Person {
     private String firstName;
     private String lastName;
@@ -11,6 +12,7 @@ public abstract class Person {
 public Person(String firstName, String lastName, String birthdate, String nationalRegisterNumber) {
     this.firstName = firstName;
     this.lastName =  lastName;
+
     this.birthDate = birthdate;
     this.nationalRegisterNumber = nationalRegisterNumber;
 }
