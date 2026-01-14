@@ -1,6 +1,10 @@
 package entity.tickect;
 import entity.person.Passanger;
 import entity.trip.Trip;
+
+/**
+ * Klasse voor de ticket
+ */
 public class Ticket {
     private Passanger passanger;
     private Trip trip;
