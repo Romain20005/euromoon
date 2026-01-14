@@ -11,7 +11,18 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Dit is het start van mijn applicatie
+ * Startpunt van mijn Euromoon applicatie.
+ *
+ *  Een medewerker
+ * van Euromoon kan hier verschillende acties uitvoeren:
+ * - Passagiers registreren
+ * - Reizen aanmaken
+ * - Treinen koppelen aan reizen
+ * - Tickets verkopen
+ * - Boardinglijsten genereren
+ *
+ * De klasse bewaart alle data tijdelijk in lijsten tijdens het uitvoeren
+ * van het programma.
  */
 public class Main {
     private static List<Passanger> passangers = new ArrayList<>();
@@ -60,7 +71,11 @@ public class Main {
         }
         System.out.println("Programma afgesloten");
     }
-
+    /**
+     * Registreert een nieuwe passagier via gebruikersinvoer.
+     * Vraagt voornaam, achternaam, geboortedatum en rijksregisternummer
+     * en voegt de passagier toe aan de lijst.
+     */
     private static void registreerPassagier(Scanner scanner) {
         System.out.print("Voornaam: ");
         String firstName = scanner.nextLine();
@@ -79,7 +94,11 @@ public class Main {
 
         System.out.println("Passagier geregistreerd ");
     }
-
+    /**
+     * Maakt een nieuwe reis aan op basis van vertrekstation,
+     * bestemmingsstation en vertrektijd.
+     * De reis wordt toegevoegd aan de lijst met reizen.
+     */
     private static void maakReis(Scanner scanner) {
         System.out.println("Vertrekstation: ");
         String from = scanner.nextLine();
@@ -101,7 +120,11 @@ public class Main {
 
         System.out.println("Reis succesvol aangemaakt ");
     }
-
+    /**
+     * Koppelt een nieuwe trein aan een bestaande reis.
+     * De gebruiker kiest een reis en een locomotieftype.
+     * Daarna wordt de trein aan de reis gekoppeld.
+     */
     private static void koppelTrein(Scanner scanner) {
         if (trips.isEmpty()) {
             System.out.println("Geen reizen beschikbaar.");
@@ -137,7 +160,10 @@ public class Main {
 
         System.out.println("Trein gekoppeld aan reis ✔️");
     }
-
+    /**
+     * Verkoopt een ticket aan een passagier voor een geselecteerde reis.
+     * Controleert of de reis een gekoppelde trein heeft.
+     */
     private static void verkoopTicket(Scanner scanner) {
         if (passangers.isEmpty() || trips.isEmpty()) {
             System.out.println("Niet genoeg data.");
@@ -178,7 +204,10 @@ public class Main {
         System.out.println("Ticket verkocht");
 
     }
-
+    /**
+     * Genereert een boardinglijst voor een geselecteerde reis.
+     * Schrijft de passagiersnamen naar een tekstbestand.
+     */
     private static void printBoardinglijst(Scanner scanner) {
         if (trips.isEmpty()) {
             System.out.println("Geen reizen beschikbaar.");
