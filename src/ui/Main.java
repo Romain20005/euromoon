@@ -53,7 +53,7 @@ public class Main {private static List<Passanger> passangers = new ArrayList<>()
         }
         System.out.println("Programma afgesloten");
     }
-        private static void registreerPassagier (Scanner scanner){
+        private static void registreerPassagier (Scanner scanner) {
             System.out.print("Voornaam: ");
             String firstName = scanner.nextLine();
 
@@ -71,6 +71,104 @@ public class Main {private static List<Passanger> passangers = new ArrayList<>()
 
             System.out.println("Passagier geregistreerd ");
         }
+        private static void maakReis (Scanner scanner) {
+            System.out.println("Vertrekstation: ");
+            String from = scanner.nextLine();
+            System.out.println("Bestemmingsstation: ");
+            String to = scanner.nextLine();
+
+            System.out.println("Vertrektijd (bv 2026-03-05T12:30): ");
+            String dateInput = scanner.nextLine();
+
+            LocalDateTime departureTime;
+            try {
+                departureTime = LocalDateTime.parse(dateInput);
+            } catch(Exception e){
+                System.out.println("Fout formaat datum! ");
+                return;
+            }
+            Trip trip = new Trip(from, to, departureTime);
+            trips.add(trip);
+
+            System.out.println("Reis succesvol aangemaakt ");
+        }
+private static void koppelTrein(Scanner scanner) {
+        if(trips.isEmpty()) {
+            System.out.println("Geen reizen beschikbaar.");
+            return;
+        }
+        // Hier toon ik de reizen met een nummer ervoor
+    for(int i = 0; i < trips.size(); i++){
+        Trip t = trips.get(i);
+        System.out.println(i + ": " + t.getFromStation() + " -> " +
+                t.getToStation() + " " + t.getDepartureTime());
+    }
+    System.out.print("Kies reis index: ");
+    int index = scanner.nextInt();
+    scanner.nextLine();
+
+    if(index < 0 || index >= trips.size()){
+        System.out.println("Ongeldige index.");
+        return;
+    }
+    System.out.println("Kies locomotief type:");
+    System.out.println("1: Class373");
+    System.out.println("2: Class374");
+
+    int keuze = scanner.nextInt();
+    scanner.nextLine();
+
+    Locomotief loco = (keuze == 1) ? new Class373() : new Class374();
+
+    Train train = new Train(loco);
+
+    trips.get(index).setTrain(train);
+    trains.add(train);
+
+    System.out.println("Trein gekoppeld aan reis ✔️");
+}
+private static void verkoopTicket(Scanner scanner) {
+    if(passangers.isEmpty() || trips.isEmpty()){
+        System.out.println("Niet genoeg data.");
+        return;
+    }
+    //Kies passagier
+    System.out.println("kies passagier index: ");
+    for(int i = 0; i < passangers.size(); i++) {
+        System.out.println(i + " : " + passangers.get(i).getFirstName());
+    }
+    int pIndex = scanner.nextInt();
+    scanner.nextLine();
+
+    // Kies reis
+    System.out.println("kies reis index: ");
+    for(int i=0; i <trips.size(); i++) {
+        System.out.println(i + " : " + trips.get(i).getFromStation() + " -> " + trips.get(i).getToStation());
+    }
+    int rIndex = scanner.nextInt();
+    scanner.nextLine();
+
+    Trip trip = trips.get(rIndex);
+
+    // Foutcontrole zien of mijn trein bestaat
+    if(trip.getTrain()==null){
+        System.out.println("Nog geen treiin gekoppeld ! ");
+        return;
+    }
+    // klasse kiezen
+    System.out.println("Eerste klasse ? (true/false)");
+    boolean firstclass = scanner.nextBoolean();
+    scanner.nextLine();
+
+    // Ticket maken
+    Ticket t = new Ticket(passangers.get(pIndex), trip , firstclass);
+    tickets.add(t);
+
+    System.out.println("Ticket verkocht");
+
+}
+}
+
 
 
 
